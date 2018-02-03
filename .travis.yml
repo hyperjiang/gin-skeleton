@@ -4,3 +4,9 @@ go:
 
 notifications:
   email: false
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS gin DEFAULT CHARACTER SET utf8mb4;'
