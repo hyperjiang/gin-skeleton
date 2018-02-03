@@ -19,8 +19,7 @@ type UserTestSuite struct {
 
 func (suite *UserTestSuite) SetupTest() {
 	gin.SetMode(gin.ReleaseMode)
-
-	config.Load("../config.yml")
+	config.Server.Mode = gin.ReleaseMode
 
 	suite.rec = httptest.NewRecorder()
 	suite.context, suite.app = gin.CreateTestContext(suite.rec)

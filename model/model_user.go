@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-// User 用户
+// User the user model
 type User struct {
 	ID        uint      `gorm:"primary_key" json:"id"`
 	Name      string    `json:"name"`

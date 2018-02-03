@@ -69,5 +69,8 @@ func Load(file string) (GlobalConfig, error) {
 
 // loads configs
 func init() {
+	if flag.Lookup("test.v") != nil { // run under go test
+		ConfigFile = "../config.yml"
+	}
 	Load(ConfigFile)
 }

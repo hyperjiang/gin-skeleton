@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hyperjiang/gin-skeleton/config"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -18,6 +19,8 @@ type IndexTestSuite struct {
 
 func (suite *IndexTestSuite) SetupTest() {
 	gin.SetMode(gin.ReleaseMode)
+	config.Server.Mode = gin.ReleaseMode
+
 	suite.rec = httptest.NewRecorder()
 	suite.context, suite.app = gin.CreateTestContext(suite.rec)
 	suite.app.LoadHTMLGlob("../view/*")

@@ -1,4 +1,8 @@
 # gin-skeleton
+
+[![](https://goreportcard.com/badge/github.com/hyperjiang/gin-skeleton)](https://goreportcard.com/report/github.com/hyperjiang/gin-skeleton)
+[![Build Status](https://travis-ci.org/hyperjiang/gin-skeleton.svg?branch=master)](https://travis-ci.org/hyperjiang/gin-skeleton)
+
 Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework
 
 ```
@@ -18,7 +22,7 @@ go run main.go
 
 ## Configuration
 
-Edit the `config.yml` and modify it with your own config
+Edit the `config.yml` with your own config
 
 ## Database Migration
 
