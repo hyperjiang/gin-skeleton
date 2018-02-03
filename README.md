@@ -1,2 +1,54 @@
 # gin-skeleton
 Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework
+
+```
+# start a web server listening on 0.0.0.0:8080
+go run main.go
+```
+
+## Components
+
+- Framework: [gin-gonic/gin](https://github.com/gin-gonic/gin)
+- Dependency management: [golang/dep](golang/dep)
+- Database ORM: [jinzhu/gorm](https://github.com/jinzhu/gorm)
+- Database migration: [rubenv/sql-migrate](https://github.com/rubenv/sql-migrate)
+- Leveled logs: [golang/glog](https://github.com/golang/glog)
+- YAML support: [go-yaml/yaml](https://github.com/go-yaml/yaml)
+- Testing toolkit: [stretchr/testify](https://github.com/stretchr/testify)
+
+## Configuration
+
+Edit the `config.yml` and modify it with your own config
+
+## Database Migration
+
+**Create the databse first**
+
+```
+CREATE DATABASE IF NOT EXISTS `gin` DEFAULT CHARACTER SET utf8mb4;
+```
+
+
+**Migrates the database to the most recent version available**
+
+```
+./migrate.sh up
+```
+
+**Undo a database migration**
+
+```
+./migrate.sh down
+```
+
+**Show migration status**
+
+```
+./migrate.sh status
+```
+
+**Create a new migration**
+
+```
+./migrate.sh new a_new_migration
+```

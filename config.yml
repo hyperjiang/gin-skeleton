@@ -1,0 +1,17 @@
+server:
+  version: v0.1
+  addr: :8080
+  mode: debug
+  static_dir: ./public
+  view_dir: ./view
+  log_dir: ./log
+  upload_dir: ./storage
+  max_multipart_memory: 10
+
+database:
+  dialect: mysql
+  datasource: root:@tcp(localhost:3306)/gin?charset=utf8mb4&timeout=10s&parseTime=True
+  dir: sql
+  table: migrations
+  max_idle_conns: 2
+  max_open_conns: 16
