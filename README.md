@@ -26,7 +26,7 @@ Edit the `config.yml` with your own config
 
 ## Database Migration
 
-**Create the databse first**
+**Create the database first**
 
 ```
 CREATE DATABASE IF NOT EXISTS `gin` DEFAULT CHARACTER SET utf8mb4;

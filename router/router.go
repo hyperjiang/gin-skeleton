@@ -10,12 +10,15 @@ func Route(app *gin.Engine) {
 	indexController := new(controller.IndexController)
 	app.GET(
 		"/", indexController.GetIndex,
-	).GET(
-		"/version", indexController.GetVersion,
 	)
 
 	userController := new(controller.UserController)
 	app.GET(
 		"/user/:id", userController.GetUser,
 	)
+
+	api := app.Group("/api")
+	{
+		api.GET("/version", indexController.GetVersion)
+	}
 }
