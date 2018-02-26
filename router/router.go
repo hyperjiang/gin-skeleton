@@ -15,6 +15,14 @@ func Route(app *gin.Engine) {
 	userController := new(controller.UserController)
 	app.GET(
 		"/user/:id", userController.GetUser,
+	).GET(
+		"/signup", userController.SignupForm,
+	).POST(
+		"/signup", userController.Signup,
+	).GET(
+		"/login", userController.LoginForm,
+	).POST(
+		"/login", userController.Login,
 	)
 
 	api := app.Group("/api")
