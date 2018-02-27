@@ -1,8 +1,10 @@
 package router
 
 import (
+	jwt "github.com/appleboy/gin-jwt"
 	"github.com/gin-gonic/gin"
 	"github.com/hyperjiang/gin-skeleton/controller"
+	"github.com/hyperjiang/gin-skeleton/middleware"
 )
 
 // Route makes the routing
@@ -28,5 +30,19 @@ func Route(app *gin.Engine) {
 	api := app.Group("/api")
 	{
 		api.GET("/version", indexController.GetVersion)
+	}
+
+	auth := app.Group("/auth")
+	authMiddleware := middleware.Auth()
+	auth.Use(authMiddleware.MiddlewareFunc())
+	{
+		auth.GET("/hello", func(c *gin.Context) {
+			claims := jwt.ExtractClaims(c)
+			c.JSON(200, gin.H{
+				"user": claims["id"],
+				"text": "Hello World.",
+			})
+		})
+		auth.GET("/refresh_token", authMiddleware.RefreshHandler)
 	}
 }
