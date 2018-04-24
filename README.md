@@ -10,10 +10,14 @@ Gin Skeleton is a simple boilerplate to kickstart a web server project based on 
 go run main.go
 ```
 
+## Installation
+
+Run `dep ensure`
+
 ## Components
 
 - Framework: [gin-gonic/gin](https://github.com/gin-gonic/gin)
-- Dependency management: [golang/dep](golang/dep)
+- Dependency management: [golang/dep](https://github.com/golang/dep)
 - Database ORM: [jinzhu/gorm](https://github.com/jinzhu/gorm)
 - Database migration: [rubenv/sql-migrate](https://github.com/rubenv/sql-migrate)
 - Leveled logs: [golang/glog](https://github.com/golang/glog)
