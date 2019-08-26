@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hyperjiang/gin-skeleton/controller"
 	"github.com/hyperjiang/gin-skeleton/middleware"
+	"github.com/hyperjiang/gin-skeleton/model"
 )
 
 // Route makes the routing
@@ -13,6 +14,22 @@ func Route(app *gin.Engine) {
 	app.GET(
 		"/", indexController.GetIndex,
 	)
+
+	auth := app.Group("/auth")
+	authMiddleware := middleware.Auth()
+	auth.GET("/refresh_token", authMiddleware.RefreshHandler)
+	auth.Use(authMiddleware.MiddlewareFunc())
+	{
+		auth.GET("/hello", func(c *gin.Context) {
+			claims := jwt.ExtractClaims(c)
+			user, _ := c.Get("email")
+			c.JSON(200, gin.H{
+				"email": claims["email"],
+				"name":  user.(*model.User).Name,
+				"text":  "Hello World.",
+			})
+		})
+	}
 
 	userController := new(controller.UserController)
 	app.GET(
@@ -24,25 +41,11 @@ func Route(app *gin.Engine) {
 	).GET(
 		"/login", userController.LoginForm,
 	).POST(
-		"/login", userController.Login,
+		"/login", authMiddleware.LoginHandler,
 	)
 
 	api := app.Group("/api")
 	{
 		api.GET("/version", indexController.GetVersion)
-	}
-
-	auth := app.Group("/auth")
-	authMiddleware := middleware.Auth()
-	auth.Use(authMiddleware.MiddlewareFunc())
-	{
-		auth.GET("/hello", func(c *gin.Context) {
-			claims := jwt.ExtractClaims(c)
-			c.JSON(200, gin.H{
-				"user": claims["id"],
-				"text": "Hello World.",
-			})
-		})
-		auth.GET("/refresh_token", authMiddleware.RefreshHandler)
 	}
 }

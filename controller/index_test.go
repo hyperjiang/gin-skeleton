@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hyperjiang/gin-skeleton/config"
+	"github.com/hyperjiang/php"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -35,7 +36,7 @@ func (suite *IndexTestSuite) TestGetIndex() {
 func (suite *IndexTestSuite) TestGetVersion() {
 	suite.ctrl.GetVersion(suite.context)
 	suite.Equal(200, suite.rec.Code)
-	suite.Equal("{\"version\":\"v0.1\"}", suite.rec.Body.String())
+	suite.Equal("{\"version\":\"v0.1\"}", php.Trim(suite.rec.Body.String()))
 }
 
 func TestIndexTestSuite(t *testing.T) {

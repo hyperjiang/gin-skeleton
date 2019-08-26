@@ -70,22 +70,6 @@ func (suite *UserTestSuite) TestSignup() {
 	suite.Equal(200, suite.rec.Code)
 }
 
-// func (suite *UserTestSuite) TestLogin() {
-// 	url := fmt.Sprintf(
-// 		"/login?email=%s&password=%s",
-// 		email,
-// 		password,
-// 	)
-// 	suite.context.Request, _ = http.NewRequest(
-// 		"POST",
-// 		url,
-// 		bytes.NewBufferString(""),
-// 	)
-
-// 	suite.ctrl.Login(suite.context)
-// 	suite.Equal(200, suite.rec.Code)
-// }
-
 func TestUserTestSuite(t *testing.T) {
 	suite.Run(t, new(UserTestSuite))
 }

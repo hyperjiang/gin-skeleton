@@ -92,12 +92,12 @@ func (u *User) Login(password string) error {
 }
 
 // LoginByEmailAndPassword login a user by his email and password
-func LoginByEmailAndPassword(email, password string) (User, error) {
+func LoginByEmailAndPassword(email, password string) (*User, error) {
 	var user User
 	err := user.GetFirstByEmail(email)
 	if err != nil {
-		return user, err
+		return &user, err
 	}
 
-	return user, user.Login(password)
+	return &user, user.Login(password)
 }

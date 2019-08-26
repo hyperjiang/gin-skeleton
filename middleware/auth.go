@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"log"
 	"time"
 
 	jwt "github.com/appleboy/gin-jwt"
@@ -8,28 +9,57 @@ import (
 	"github.com/hyperjiang/gin-skeleton/model"
 )
 
-var authMiddleware jwt.GinJWTMiddleware
+var authMiddleware *jwt.GinJWTMiddleware
+var identityKey = "email"
+
+// Login struct
+type Login struct {
+	Email    string `form:"email" json:"email" binding:"required"`
+	Password string `form:"password" json:"password" binding:"required,min=6,max=20"`
+}
 
 // Auth middleware
 func Auth() *jwt.GinJWTMiddleware {
-	return &authMiddleware
+	return authMiddleware
 }
 
 func init() {
-	authMiddleware = jwt.GinJWTMiddleware{
-		Realm:      "gin skeleton",
-		Key:        []byte("secret key"),
-		Timeout:    time.Hour,
-		MaxRefresh: time.Hour,
-		Authenticator: func(userId string, password string, c *gin.Context) (string, bool) {
-			_, err := model.LoginByEmailAndPassword(userId, password)
-			if err != nil {
-				return userId, false
+	var err error
+	authMiddleware, err = jwt.New(&jwt.GinJWTMiddleware{
+		Realm:       "gin-skeleton",
+		Key:         []byte("secret key"),
+		Timeout:     time.Hour,
+		MaxRefresh:  time.Hour,
+		IdentityKey: identityKey,
+		SendCookie:  true,
+		PayloadFunc: func(data interface{}) jwt.MapClaims {
+			if v, ok := data.(*model.User); ok {
+				return jwt.MapClaims{
+					identityKey: v.Email,
+					"name":      v.Name,
+				}
 			}
-			return userId, true
+			return jwt.MapClaims{}
 		},
-		Authorizator: func(userId string, c *gin.Context) bool {
-			if userId == "admin" || userId == "hyper" {
+		IdentityHandler: func(c *gin.Context) interface{} {
+			claims := jwt.ExtractClaims(c)
+			return &model.User{
+				Email: claims[identityKey].(string),
+				Name:  claims["name"].(string),
+			}
+		},
+		Authenticator: func(c *gin.Context) (interface{}, error) {
+			var loginVals Login
+			if err := c.ShouldBind(&loginVals); err != nil {
+				return "", jwt.ErrMissingLoginValues
+			}
+			email := loginVals.Email
+			password := loginVals.Password
+
+			return model.LoginByEmailAndPassword(email, password)
+		},
+		Authorizator: func(data interface{}, c *gin.Context) bool {
+			if v, ok := data.(*model.User); ok && v.Name == "admin" {
 				return true
 			}
 
@@ -48,7 +78,8 @@ func init() {
 		// - "header:<name>"
 		// - "query:<name>"
 		// - "cookie:<name>"
-		TokenLookup: "header:Authorization",
+		// - "param:<name>"
+		TokenLookup: "header: Authorization, query: token, cookie: jwt",
 		// TokenLookup: "query:token",
 		// TokenLookup: "cookie:token",
 
@@ -57,5 +88,9 @@ func init() {
 
 		// TimeFunc provides the current time. You can override it to use another time value. This is useful for testing or if your server uses a different time zone than your tokens.
 		TimeFunc: time.Now,
+	})
+
+	if err != nil {
+		log.Fatal("JWT Error:" + err.Error())
 	}
 }

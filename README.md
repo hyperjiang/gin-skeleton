@@ -3,7 +3,9 @@
 [![](https://goreportcard.com/badge/github.com/hyperjiang/gin-skeleton)](https://goreportcard.com/report/github.com/hyperjiang/gin-skeleton)
 [![Build Status](https://travis-ci.org/hyperjiang/gin-skeleton.svg?branch=master)](https://travis-ci.org/hyperjiang/gin-skeleton)
 
-Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework
+Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework.
+
+*Require go version >= 1.10*
 
 ```
 # start a web server listening on 0.0.0.0:8080

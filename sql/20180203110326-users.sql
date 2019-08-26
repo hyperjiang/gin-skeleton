@@ -1,10 +1,10 @@
 
 -- +migrate Up
 CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT '',
-  `email` varchar(255) DEFAULT '',
-  `password` varchar(255) DEFAULT '',
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT '',
+  `email` varchar(100) DEFAULT '',
+  `password` varchar(100) DEFAULT '',
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

@@ -26,12 +26,12 @@
 
 
 [[constraint]]
-  branch = "master"
   name = "github.com/appleboy/gin-jwt"
+  version = "2.6.2"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/gin-gonic/gin"
+  version = "1.4.0"
 
 [[constraint]]
   branch = "master"
@@ -39,11 +39,11 @@
 
 [[constraint]]
   name = "github.com/jinzhu/gorm"
-  version = "1.9.1"
+  version = "1.9.10"
 
 [[constraint]]
   name = "github.com/stretchr/testify"
-  version = "1.2.1"
+  version = "1.4.0"
 
 [[constraint]]
   branch = "master"
@@ -51,7 +51,7 @@
 
 [[constraint]]
   name = "gopkg.in/yaml.v2"
-  version = "2.2.1"
+  version = "2.2.2"
 
 [prune]
   go-tests = true
