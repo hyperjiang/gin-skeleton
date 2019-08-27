@@ -5,7 +5,7 @@
 
 Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework.
 
-*Require go version >= 1.10*
+*Require go version >= 1.11, if your go version is 1.10, please use branch `go1.10`*
 
 ```
 # start a web server listening on 0.0.0.0:8080
@@ -19,7 +19,6 @@ Run `dep ensure`
 ## Components
 
 - Framework: [gin-gonic/gin](https://github.com/gin-gonic/gin)
-- Dependency management: [golang/dep](https://github.com/golang/dep)
 - Database ORM: [jinzhu/gorm](https://github.com/jinzhu/gorm)
 - Database migration: [rubenv/sql-migrate](https://github.com/rubenv/sql-migrate)
 - Leveled logs: [golang/glog](https://github.com/golang/glog)
