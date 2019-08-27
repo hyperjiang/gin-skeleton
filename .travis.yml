@@ -1,11 +1,14 @@
 language: go
 go:
-  - 1.10.x
   - 1.11.x
   - 1.12.x
 
 notifications:
   email: false
+
+install:
+  - export GO111MODULE=on
+  - go mod download
 
 services:
   - mysql
