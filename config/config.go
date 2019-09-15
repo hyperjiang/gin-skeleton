@@ -4,6 +4,7 @@ import (
 	"flag"
 	"io/ioutil"
 	"log"
+	"os"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -69,8 +70,8 @@ func Load(file string) (GlobalConfig, error) {
 
 // loads configs
 func init() {
-	if flag.Lookup("test.v") != nil { // run under go test
-		ConfigFile = "../config.yml"
+	if os.Getenv("config") != "" {
+		ConfigFile = os.Getenv("config")
 	}
 	Load(ConfigFile)
 }

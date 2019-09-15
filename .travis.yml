@@ -9,6 +9,7 @@ notifications:
 
 install:
   - export GO111MODULE=on
+  - export config=../config.yml
   - go mod download
 
 services:
