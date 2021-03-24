@@ -4,7 +4,6 @@ server:
   mode: debug
   static_dir: ./public
   view_dir: ./view
-  log_dir: ./log
   upload_dir: ./storage
   max_multipart_memory: 10
 

@@ -1,7 +1,7 @@
 package router
 
 import (
-	jwt "github.com/appleboy/gin-jwt"
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/hyperjiang/gin-skeleton/controller"
 	"github.com/hyperjiang/gin-skeleton/middleware"

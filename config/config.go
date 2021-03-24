@@ -1,7 +1,6 @@
 package config
 
 import (
-	"flag"
 	"io/ioutil"
 	"log"
 	"os"
@@ -25,14 +24,12 @@ type ServerConfig struct {
 	Version            string
 	StaticDir          string `yaml:"static_dir"`
 	ViewDir            string `yaml:"view_dir"`
-	LogDir             string `yaml:"log_dir"`
 	UploadDir          string `yaml:"upload_dir"`
 	MaxMultipartMemory int64  `yaml:"max_multipart_memory"`
 }
 
 // DatabaseConfig is the database config
 type DatabaseConfig struct {
-	Dialect      string
 	DSN          string `yaml:"datasource"`
 	MaxIdleConns int    `yaml:"max_idle_conns"`
 	MaxOpenConns int    `yaml:"max_open_conns"`
@@ -61,9 +58,6 @@ func Load(file string) (GlobalConfig, error) {
 
 	Server = Global.Server
 	Database = Global.Database
-
-	// set log dir flag for glog
-	flag.CommandLine.Set("log_dir", Server.LogDir)
 
 	return Global, nil
 }

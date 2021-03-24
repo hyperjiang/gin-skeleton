@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/golang/glog"
 	"github.com/hyperjiang/gin-skeleton/config"
 	"github.com/hyperjiang/gin-skeleton/router"
 )

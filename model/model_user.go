@@ -1,9 +1,11 @@
 package model
 
 import (
+	"errors"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 // User the user model
@@ -23,28 +25,24 @@ func (User) TableName() string {
 
 // GetFirstByID gets the user by his ID
 func (u *User) GetFirstByID(id string) error {
-	db := DB().Where("id=?", id).First(u)
+	err := DB().Where("id=?", id).First(u).Error
 
-	if db.RecordNotFound() {
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return ErrDataNotFound
-	} else if db.Error != nil {
-		return db.Error
 	}
 
-	return nil
+	return err
 }
 
 // GetFirstByEmail gets the user by his email
 func (u *User) GetFirstByEmail(email string) error {
-	db := DB().Where("email=?", email).First(u)
+	err := DB().Where("email=?", email).First(u).Error
 
-	if db.RecordNotFound() {
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return ErrDataNotFound
-	} else if db.Error != nil {
-		return db.Error
 	}
 
-	return nil
+	return err
 }
 
 // Create a new user
