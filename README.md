@@ -58,3 +58,19 @@ CREATE DATABASE IF NOT EXISTS `gin` DEFAULT CHARACTER SET utf8mb4;
 ```
 ./migrate.sh new a_new_migration
 ```
+
+## Available endpoints
+
+See [router](https://github.com/hyperjiang/gin-skeleton/blob/master/router/router.go)
+
+- Home page: http://localhost:8080/
+
+- Api version: http://localhost:8080/api/version
+
+- Sign up: http://localhost:8080/signup
+
+- Login: http://localhost:8080/login
+
+- Get user info: http://localhost:8080/user/1
+
+- Test jwt: http://localhost:8080/auth/hello (only user "admin" can see this page)
