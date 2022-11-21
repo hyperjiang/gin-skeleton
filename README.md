@@ -1,6 +1,6 @@
 # gin-skeleton
 
-[![Build Status](https://travis-ci.org/hyperjiang/gin-skeleton.svg?branch=master)](https://travis-ci.org/hyperjiang/gin-skeleton)
+[![CI](https://github.com/hyperjiang/gin-skeleton/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/hyperjiang/gin-skeleton/actions/workflows/ci.yml)
 [![Go Report](https://goreportcard.com/badge/github.com/hyperjiang/gin-skeleton)](https://goreportcard.com/report/github.com/hyperjiang/gin-skeleton)
 [![License](https://img.shields.io/github/license/hyperjiang/gin-skeleton.svg)](https://github.com/hyperjiang/gin-skeleton)
 
