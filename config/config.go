@@ -1,7 +1,6 @@
 package config
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -44,7 +43,7 @@ var (
 
 // Load config from file
 func Load(file string) (GlobalConfig, error) {
-	data, err := ioutil.ReadFile(file)
+	data, err := os.ReadFile(file)
 	if err != nil {
 		log.Printf("%v", err)
 		return Global, err
@@ -67,5 +66,8 @@ func init() {
 	if os.Getenv("config") != "" {
 		ConfigFile = os.Getenv("config")
 	}
-	Load(ConfigFile)
+
+	if _, err := Load(ConfigFile); err != nil {
+		log.Fatal("fail to load configs: " + err.Error())
+	}
 }
