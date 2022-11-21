@@ -6,7 +6,7 @@
 
 Gin Skeleton is a simple boilerplate to kickstart a web server project based on Gin Framework.
 
-Require go version >= 1.14, if your go version is lower, please use legacy branches,
+Require go version >= 1.18, if your go version is lower, please use legacy branches,
 there are quite a lot of incompatible changes between master and legacy branches.
 
 ```

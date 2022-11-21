@@ -32,7 +32,7 @@ func init() {
 		MaxRefresh:  time.Hour,
 		IdentityKey: identityKey,
 		SendCookie:  true,
-		PayloadFunc: func(data interface{}) jwt.MapClaims {
+		PayloadFunc: func(data any) jwt.MapClaims {
 			if v, ok := data.(*model.User); ok {
 				return jwt.MapClaims{
 					identityKey: v.Email,
@@ -41,14 +41,14 @@ func init() {
 			}
 			return jwt.MapClaims{}
 		},
-		IdentityHandler: func(c *gin.Context) interface{} {
+		IdentityHandler: func(c *gin.Context) any {
 			claims := jwt.ExtractClaims(c)
 			return &model.User{
 				Email: claims[identityKey].(string),
 				Name:  claims["name"].(string),
 			}
 		},
-		Authenticator: func(c *gin.Context) (interface{}, error) {
+		Authenticator: func(c *gin.Context) (any, error) {
 			var loginVals Login
 			if err := c.ShouldBind(&loginVals); err != nil {
 				return "", jwt.ErrMissingLoginValues
@@ -58,7 +58,7 @@ func init() {
 
 			return model.LoginByEmailAndPassword(email, password)
 		},
-		Authorizator: func(data interface{}, c *gin.Context) bool {
+		Authorizator: func(data any, c *gin.Context) bool {
 			if v, ok := data.(*model.User); ok && v.Name == "admin" {
 				return true
 			}

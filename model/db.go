@@ -13,8 +13,8 @@ import (
 
 // DBInstance is a singleton DB instance
 type DBInstance struct {
-	initializer func() interface{}
-	instance    interface{}
+	initializer func() any
+	instance    any
 	once        sync.Once
 }
 
@@ -23,14 +23,14 @@ var (
 )
 
 // Instance gets the singleton instance
-func (i *DBInstance) Instance() interface{} {
+func (i *DBInstance) Instance() any {
 	i.once.Do(func() {
 		i.instance = i.initializer()
 	})
 	return i.instance
 }
 
-func dbInit() interface{} {
+func dbInit() any {
 	lv := logger.Error
 	if config.Server.Mode != gin.ReleaseMode {
 		lv = logger.Info // output debug logs in dev mode
