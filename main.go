@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"log"
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
@@ -28,5 +29,7 @@ func main() {
 	router.Route(app)
 
 	// Listen and Serve
-	app.Run(*addr)
+	if err := app.Run(*addr); err != nil {
+		log.Fatal(err.Error())
+	}
 }
